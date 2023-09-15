@@ -75,6 +75,10 @@ main > aside > ul > * {
   background-color: var(--secondary);
   line-height: 1.2;
   padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
 }
 
 .project-container header :is(h1, h2) {
@@ -85,4 +89,12 @@ main > aside > ul > * {
   font-size: 1.2rem;
   font-weight: normal;
   font-style: italic;
+}
+
+.project-container header .header-btn-container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: end;
+  align-items: center;
+  flex-wrap: wrap;
 }
