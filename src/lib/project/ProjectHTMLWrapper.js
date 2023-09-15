@@ -62,8 +62,11 @@ class ProjectHTMLWrapper {
       "<span class='material-symbols-outlined'>edit_square</span>";
     editBtn.addEventListener("click", () => {
       header.classList.toggle("editing");
-      this._updateFormElement();
-      headerTextEditForm.querySelector("input").select();
+
+      if (header.classList.contains("editing")) {
+        this._updateFormElement();
+        headerTextEditForm.querySelector("input").select();
+      }
     });
 
     const deleteBtn = headerBtnContainer.appendChild(
