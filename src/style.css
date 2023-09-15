@@ -35,14 +35,14 @@ body {
   grid-template: max-content 1fr / 1fr;
 }
 
-header {
+body > header {
   background-color: var(--primary);
   color: var(--background);
   padding: 0.5em;
   font-size: 3rem;
 }
 
-main {
+body > main {
   display: grid;
   grid-template: 1fr / max-content 1fr;
 }
@@ -69,4 +69,20 @@ main > aside > ul {
 
 main > aside > ul > * {
   margin-top: 0.25rem;
+}
+
+.project-container header {
+  background-color: var(--secondary);
+  line-height: 1.2;
+  padding: 1rem;
+}
+
+.project-container header :is(h1, h2) {
+  margin: 0;
+}
+
+.project-container header h2 {
+  font-size: 1.2rem;
+  font-weight: normal;
+  font-style: italic;
 }
