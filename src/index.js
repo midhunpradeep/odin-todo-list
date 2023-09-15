@@ -19,6 +19,12 @@ class ToDoApp {
     if (defaultProjects.length > 0) {
       this.setActiveProject(defaultProjects[0]);
     }
+
+    const newProjectBtn = document.getElementById("new-project-btn");
+    newProjectBtn.addEventListener("click", () => {
+      const newProject = this.createProject("Untitled Project", "");
+      this.setActiveProject(newProject);
+    });
   }
 
   updateProjectList() {
@@ -48,6 +54,13 @@ class ToDoApp {
     const projectElement = containerElement.appendChild(
       ProjectHTMLWrapper.generateProjectHTMLElement(activeProject),
     );
+  }
+
+  createProject(title, description) {
+    const project = new Project(title, description);
+    this.projects.push(project);
+    this.updateProjectList();
+    return project;
   }
 }
 
