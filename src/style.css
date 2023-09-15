@@ -1,0 +1,71 @@
+:root {
+  --text: hsl(42, 43%, 9%);
+  --background: hsl(43, 47%, 97%);
+  --primary: hsl(221, 43%, 58%);
+  --secondary: hsl(40, 43%, 89%);
+  --accent: hsl(221, 43%, 49%);
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+
+  /* Center text inside button*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--background);
+  color: var(--text);
+  display: grid;
+  grid-template: max-content 1fr / 1fr;
+}
+
+header {
+  background-color: var(--primary);
+  color: var(--background);
+  padding: 0.5em;
+  font-size: 3rem;
+}
+
+main {
+  display: grid;
+  grid-template: 1fr / max-content 1fr;
+}
+
+main > aside {
+  background-color: var(--accent);
+  color: var(--background);
+  padding: 1em;
+}
+
+main > aside > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+main > aside > ul {
+  list-style: none;
+  margin-top: 1rem;
+  padding-left: 0;
+}
+
+main > aside > ul > * {
+  margin-top: 0.25rem;
+}
