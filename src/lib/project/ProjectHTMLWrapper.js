@@ -19,6 +19,7 @@ class ProjectHTMLWrapper {
 
     this._htmlElement = document.createElement("div");
     this._updateHTMLElement();
+    this._addKeyBindings();
   }
 
   _updateHTMLElement() {
@@ -86,6 +87,7 @@ class ProjectHTMLWrapper {
     const todoContainer = this.htmlElement.appendChild(
       document.createElement("todo-container"),
     );
+    console.log(this.project);
   }
 
   _updateFormElement() {
@@ -116,6 +118,7 @@ class ProjectHTMLWrapper {
     );
     saveBtn.type = "button";
     saveBtn.textContent = "Save";
+    saveBtn.classList.add("form-save-btn");
 
     saveBtn.addEventListener("click", () => {
       const inputElements = [...formElement.querySelectorAll("input")];
@@ -129,9 +132,30 @@ class ProjectHTMLWrapper {
     );
     cancelBtn.type = "button";
     cancelBtn.textContent = "Cancel";
+    cancelBtn.classList.add("form-cancel-btn");
 
     cancelBtn.addEventListener("click", () => {
       this.htmlElement.querySelector("header").classList.remove("editing");
+    });
+  }
+
+  _addKeyBindings() {
+    window.addEventListener("keyup", (event) => {
+      if (
+        !this.htmlElement.querySelector("header").classList.contains("editing")
+      ) {
+        return;
+      }
+
+      const formButtons = this.htmlElement.querySelector(".form-btn-container");
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        formButtons.querySelector(".form-cancel-btn").click();
+      } else if (event.key === "Enter") {
+        event.preventDefault();
+        formButtons.querySelector(".form-save-btn").click();
+      }
     });
   }
 }
