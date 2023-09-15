@@ -13,9 +13,14 @@ class ProjectHTMLWrapper {
     return this._htmlElement;
   }
 
-  constructor(project, elementDeleteFunction = null) {
+  constructor(
+    project,
+    elementDeleteFunction = null,
+    parentUpdateFunction = null,
+  ) {
     this._project = project;
     this._deleteFunction = elementDeleteFunction;
+    this._parentUpdateFunction = parentUpdateFunction;
 
     this._htmlElement = document.createElement("div");
     this._updateHTMLElement();
@@ -87,7 +92,10 @@ class ProjectHTMLWrapper {
     const todoContainer = this.htmlElement.appendChild(
       document.createElement("todo-container"),
     );
-    console.log(this.project);
+
+    if (this._parentUpdateFunction !== null) {
+      this._parentUpdateFunction();
+    }
   }
 
   _updateFormElement() {
