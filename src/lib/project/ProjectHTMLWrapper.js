@@ -15,17 +15,19 @@ class ProjectHTMLWrapper {
 
   constructor(project, elementDeleteFunction = null) {
     this._project = project;
-    this._htmlElement = this._generateProjectHTMLElement(
-      project,
-      elementDeleteFunction,
-    );
+    this._deleteFunction = elementDeleteFunction;
+
+    this._htmlElement = document.createElement("div");
+    this._updateHTMLElement();
   }
 
-  _generateProjectHTMLElement(project, elementDeleteFunction = null) {
-    const element = document.createElement("div");
-    element.dataset.uuid = uuidv4();
+  _updateHTMLElement() {
+    this.htmlElement.dataset.uuid = uuidv4();
+    this.htmlElement.replaceChildren();
 
-    const header = element.appendChild(document.createElement("header"));
+    const header = this.htmlElement.appendChild(
+      document.createElement("header"),
+    );
 
     const headerTextContainer = header.appendChild(
       document.createElement("div"),
@@ -33,18 +35,19 @@ class ProjectHTMLWrapper {
     headerTextContainer.classList.add("header-text-container");
 
     const title = headerTextContainer.appendChild(document.createElement("h1"));
-    title.textContent = project.title;
+    title.textContent = this.project.title;
     title.dataset.formLabel = "Title";
 
     const description = headerTextContainer.appendChild(
       document.createElement("h2"),
     );
-    description.textContent = project.description;
+    description.textContent = this.project.description;
     description.dataset.formLabel = "Description";
 
     const headerTextEditForm = header.appendChild(
-      this._generateFormElement(element),
+      document.createElement("form"),
     );
+    headerTextEditForm.classList.add("header-text-form");
 
     const headerBtnContainer = header.appendChild(
       document.createElement("div"),
@@ -59,6 +62,8 @@ class ProjectHTMLWrapper {
       "<span class='material-symbols-outlined'>edit_square</span>";
     editBtn.addEventListener("click", () => {
       header.classList.toggle("editing");
+      this._updateFormElement();
+      headerTextEditForm.querySelector("input").select();
     });
 
     const deleteBtn = headerBtnContainer.appendChild(
@@ -67,34 +72,33 @@ class ProjectHTMLWrapper {
     deleteBtn.type = "button";
     deleteBtn.innerHTML =
       "<span class='material-symbols-outlined'>delete</span>";
-    if (elementDeleteFunction !== null) {
+    if (this._deleteFunction !== null) {
       deleteBtn.addEventListener("click", () => {
-        elementDeleteFunction();
+        this._deleteFunction();
       });
     } else {
       console.warn("No delete function provided for " + this);
     }
 
-    const todoContainer = element.appendChild(
+    const todoContainer = this.htmlElement.appendChild(
       document.createElement("todo-container"),
     );
-
-    return element;
   }
 
-  _generateFormElement(projectElement) {
-    const formElement = document.createElement("form");
-    formElement.classList.add("header-text-form");
+  _updateFormElement() {
+    const formElement = this.htmlElement.querySelector(".header-text-form");
+    formElement.replaceChildren();
 
-    for (const editableElement of projectElement.querySelectorAll(
-      "[data-form-label]",
-    )) {
+    const editableElements =
+      this.htmlElement.querySelectorAll("[data-form-label]");
+
+    for (const editableElement of editableElements) {
       const label = formElement.appendChild(document.createElement("label"));
       label.textContent = editableElement.dataset.formLabel;
 
       const input = formElement.appendChild(document.createElement("input"));
       input.id =
-        projectElement.dataset.uuid + "-" + label.textContent.toLowerCase();
+        this.htmlElement.dataset.uuid + "-" + label.textContent.toLowerCase();
       label.htmlFor = input.id;
       input.value = editableElement.textContent;
     }
@@ -110,12 +114,21 @@ class ProjectHTMLWrapper {
     saveBtn.type = "button";
     saveBtn.textContent = "Save";
 
+    saveBtn.addEventListener("click", () => {
+      const inputElements = [...formElement.querySelectorAll("input")];
+      this.project.title = inputElements[0].value;
+      this.project.description = inputElements[1].value;
+      this._updateHTMLElement();
+    });
+
     const cancelBtn = buttonContainer.appendChild(
       document.createElement("button"),
     );
     cancelBtn.type = "button";
     cancelBtn.textContent = "Cancel";
 
-    return formElement;
+    cancelBtn.addEventListener("click", () => {
+      this.htmlElement.querySelector("header").classList.remove("editing");
+    });
   }
 }
