@@ -21,5 +21,8 @@
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
     "serve": "webpack serve"
+  },
+  "dependencies": {
+    "uuid": "^9.0.1"
   }
 }

@@ -81,6 +81,14 @@ main > aside > ul > * {
   align-items: start;
 }
 
+.project-container header.editing .header-text-container {
+  display: none;
+}
+
+.project-container header .header-text-container {
+  display: unset;
+}
+
 .project-container header :is(h1, h2) {
   margin: 0;
 }
@@ -89,6 +97,37 @@ main > aside > ul > * {
   font-size: 1.2rem;
   font-weight: normal;
   font-style: italic;
+}
+
+.project-container header .header-text-form {
+  display: none;
+  flex: 1;
+}
+
+.project-container header.editing .header-text-form {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.33em;
+  align-items: center;
+}
+
+.project-container header.editing .header-text-form > label {
+  font-style: italic;
+  text-align: right;
+}
+
+.project-container header.editing .form-btn-container {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 0.33em;
+}
+
+.project-container header.editing .form-btn-container > button {
+  background-color: var(--primary);
+  color: var(--background);
+  padding: 0.33rem 0.67rem;
 }
 
 .project-container header .header-btn-container {
