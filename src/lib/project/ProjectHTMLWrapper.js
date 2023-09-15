@@ -3,7 +3,7 @@
 export { ProjectHTMLWrapper as default };
 
 class ProjectHTMLWrapper {
-  static generateProjectHTMLElement(project) {
+  static generateProjectHTMLElement(project, deleteFunction = null) {
     const element = document.createElement("div");
 
     const header = element.appendChild(document.createElement("header"));
@@ -38,6 +38,13 @@ class ProjectHTMLWrapper {
     deleteBtn.type = "button";
     deleteBtn.innerHTML =
       "<span class='material-symbols-outlined'>delete</span>";
+    if (deleteFunction !== null) {
+      deleteBtn.addEventListener("click", () => {
+        deleteFunction();
+      });
+    } else {
+      console.warn("No delete function provided for " + this);
+    }
 
     const todoContainer = element.appendChild(
       document.createElement("todo-container"),

@@ -47,12 +47,19 @@ class ToDoApp {
     }
   }
 
-  setActiveProject(activeProject) {
+  setActiveProject(activeProject = null) {
     const containerElement = document.querySelector(".project-container");
     containerElement.replaceChildren();
 
+    if (activeProject === null) {
+      return;
+    }
+
     const projectElement = containerElement.appendChild(
-      ProjectHTMLWrapper.generateProjectHTMLElement(activeProject),
+      ProjectHTMLWrapper.generateProjectHTMLElement(activeProject, () => {
+        this.removeProject(activeProject);
+        this.setActiveProject();
+      }),
     );
   }
 
@@ -61,6 +68,11 @@ class ToDoApp {
     this.projects.push(project);
     this.updateProjectList();
     return project;
+  }
+
+  removeProject(project) {
+    this.projects.splice(this.projects.indexOf(project), 1);
+    this.updateProjectList();
   }
 }
 
