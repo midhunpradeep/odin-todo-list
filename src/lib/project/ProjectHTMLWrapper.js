@@ -5,7 +5,23 @@ import { v4 as uuidv4 } from "uuid";
 export { ProjectHTMLWrapper as default };
 
 class ProjectHTMLWrapper {
-  static generateProjectHTMLElement(project, deleteFunction = null) {
+  get project() {
+    return this._project;
+  }
+
+  get htmlElement() {
+    return this._htmlElement;
+  }
+
+  constructor(project, elementDeleteFunction = null) {
+    this._project = project;
+    this._htmlElement = this._generateProjectHTMLElement(
+      project,
+      elementDeleteFunction,
+    );
+  }
+
+  _generateProjectHTMLElement(project, elementDeleteFunction = null) {
     const element = document.createElement("div");
     element.dataset.uuid = uuidv4();
 
@@ -51,9 +67,9 @@ class ProjectHTMLWrapper {
     deleteBtn.type = "button";
     deleteBtn.innerHTML =
       "<span class='material-symbols-outlined'>delete</span>";
-    if (deleteFunction !== null) {
+    if (elementDeleteFunction !== null) {
       deleteBtn.addEventListener("click", () => {
-        deleteFunction();
+        elementDeleteFunction();
       });
     } else {
       console.warn("No delete function provided for " + this);
@@ -66,7 +82,7 @@ class ProjectHTMLWrapper {
     return element;
   }
 
-  static _generateFormElement(projectElement) {
+  _generateFormElement(projectElement) {
     const formElement = document.createElement("form");
     formElement.classList.add("header-text-form");
 

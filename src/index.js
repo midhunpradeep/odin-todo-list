@@ -56,10 +56,10 @@ class ToDoApp {
     }
 
     const projectElement = containerElement.appendChild(
-      ProjectHTMLWrapper.generateProjectHTMLElement(activeProject, () => {
+      new ProjectHTMLWrapper(activeProject, () => {
         this.removeProject(activeProject);
         this.setActiveProject();
-      }),
+      }).htmlElement,
     );
   }
 
