@@ -137,3 +137,13 @@ main > aside > ul > * {
   align-items: center;
   flex-wrap: wrap;
 }
+
+.project-container .project-content {
+  padding: 1rem;
+}
+
+.project-container .project-content > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

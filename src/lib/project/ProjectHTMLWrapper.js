@@ -1,6 +1,8 @@
 "use strict";
 
 import { v4 as uuidv4 } from "uuid";
+import Todo from "../todo/Todo";
+import TodoHTMLWrapper from "../todo/TodoHTMLWrapper";
 
 export { ProjectHTMLWrapper as default };
 
@@ -89,9 +91,31 @@ class ProjectHTMLWrapper {
       console.warn("No delete function provided for " + this);
     }
 
-    const todoContainer = this.htmlElement.appendChild(
-      document.createElement("todo-container"),
+    const content = this.htmlElement.appendChild(document.createElement("div"));
+    content.classList.add("project-content");
+
+    const contentControls = content.appendChild(document.createElement("div"));
+
+    const contentHeading = contentControls.appendChild(
+      document.createElement("h3"),
     );
+    contentHeading.textContent = "Todos";
+
+    const addTodoBtn = contentControls.appendChild(
+      document.createElement("button"),
+    );
+    addTodoBtn.type = "button";
+    addTodoBtn.innerHTML =
+      "<span class='material-symbols-outlined'>library_add</span>";
+
+    addTodoBtn.addEventListener("click", () => {
+      this._addTodo();
+    });
+
+    const todoContainer = content.appendChild(document.createElement("div"));
+    todoContainer.classList.add("todo-container");
+
+    this._updateTodoContainer();
 
     if (this._parentUpdateFunction !== null) {
       this._parentUpdateFunction();
@@ -165,5 +189,21 @@ class ProjectHTMLWrapper {
         formButtons.querySelector(".form-save-btn").click();
       }
     });
+  }
+
+  _updateTodoContainer() {
+    const todoContainer = this.htmlElement.querySelector(".todo-container");
+    todoContainer.replaceChildren();
+
+    for (const todo of this.project) {
+      const todoElement = new TodoHTMLWrapper(todo);
+      todoContainer.appendChild(todoElement.htmlElement);
+    }
+  }
+
+  _addTodo() {
+    const todo = new Todo("New Todo", "A passable description", new Date(), 0);
+    this.project.pushTodo(todo);
+    this._updateTodoContainer();
   }
 }

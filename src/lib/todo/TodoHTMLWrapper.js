@@ -1,5 +1,7 @@
 "use strict";
 
+import { v4 as uuidv4 } from "uuid";
+
 export { TodoHTMLWrapper as default };
 
 class TodoHTMLWrapper {
@@ -18,5 +20,12 @@ class TodoHTMLWrapper {
     this._updateHTMLElement();
   }
 
-  _updateHTMLElement() {}
+  _updateHTMLElement() {
+    this.htmlElement.dataset.uuid = uuidv4();
+    this.htmlElement.replaceChildren();
+
+    // TODO: implement html
+    const title = this.htmlElement.appendChild(document.createElement("p"));
+    title.textContent = this.todo.title;
+  }
 }

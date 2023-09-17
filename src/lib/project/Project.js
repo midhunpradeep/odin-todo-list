@@ -35,4 +35,10 @@ class Project {
   removeToDoAt(index) {
     this._todos.splice(index, 1);
   }
+
+  *[Symbol.iterator]() {
+    for (const todo of this._todos) {
+      yield todo;
+    }
+  }
 }
