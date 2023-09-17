@@ -168,6 +168,11 @@ main > aside > ul > * {
   display: grid;
   gap: 0.5rem;
   grid-template: 1fr max-content / 1fr max-content;
+  cursor: pointer;
+}
+
+.todo.expanded {
+  cursor: unset;
 }
 
 .todo[data-priority="1"] {

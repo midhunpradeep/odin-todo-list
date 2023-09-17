@@ -85,17 +85,27 @@ class TodoHTMLWrapper {
     };
     expandBtn.updateText();
 
-    expandBtn.addEventListener("click", () => {
+    const expandTodo = (event) => {
+      console.log("b");
       if (!this.htmlElement.classList.contains("expanded")) {
         const otherExpandedElements =
           this.htmlElement.parentElement.querySelectorAll(".expanded");
         for (const expandedElement of otherExpandedElements) {
+          if (expandedElement === this.htmlElement) continue;
           expandedElement.classList.remove("expanded");
         }
+        this.htmlElement.classList.add("expanded");
+      } else {
+        this.htmlElement.classList.remove("expanded");
       }
-
-      this.htmlElement.classList.toggle("expanded");
       expandBtn.updateText();
-    });
+      event.stopPropagation();
+    };
+
+    expandBtn.addEventListener("click", expandTodo);
+    this.htmlElement.onclick = (event) => {
+      if (this.htmlElement.classList.contains("expanded")) return;
+      expandTodo(event);
+    };
   }
 }
