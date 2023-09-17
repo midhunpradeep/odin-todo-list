@@ -195,6 +195,7 @@ class ProjectHTMLWrapper {
     const todoContainer = this.htmlElement.querySelector(".todo-container");
     todoContainer.replaceChildren();
 
+    this.project.sort();
     for (const todo of this.project) {
       const todoElement = new TodoHTMLWrapper(todo);
       todoContainer.appendChild(todoElement.htmlElement);

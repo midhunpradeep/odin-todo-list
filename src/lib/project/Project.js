@@ -36,6 +36,12 @@ class Project {
     this._todos.splice(index, 1);
   }
 
+  sort() {
+    this._todos.sort((a, b) => {
+      return b.priority - a.priority;
+    });
+  }
+
   *[Symbol.iterator]() {
     for (const todo of this._todos) {
       yield todo;
