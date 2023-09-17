@@ -15,12 +15,18 @@ class TodoHTMLWrapper {
     return this._htmlElement;
   }
 
-  constructor(todo, deleteFunction = null, parentUpdateFunction = null) {
+  constructor(
+    todo,
+    deleteFunction = null,
+    parentUpdateFunction = null,
+    saveFunction = null,
+  ) {
     this._todo = todo;
 
     this._htmlElement = document.createElement("div");
     this._deleteFunction = deleteFunction;
     this._parentUpdateFunction = parentUpdateFunction;
+    this._saveFunction = saveFunction;
 
     this.htmlElement.classList.add("todo");
     this._updateHTMLElement();
@@ -206,6 +212,9 @@ class TodoHTMLWrapper {
       this.htmlElement.querySelector(".edit-toggle-btn").click();
       if (this._parentUpdateFunction !== null) {
         this._parentUpdateFunction();
+      }
+      if (this._saveFunction !== null) {
+        this._saveFunction();
       }
     });
 

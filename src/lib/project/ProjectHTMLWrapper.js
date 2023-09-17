@@ -19,10 +19,15 @@ class ProjectHTMLWrapper {
     project,
     elementDeleteFunction = null,
     parentUpdateFunction = null,
+    saveFunction = null,
   ) {
     this._project = project;
     this._deleteFunction = elementDeleteFunction;
     this._parentUpdateFunction = parentUpdateFunction;
+    this._saveFunction = saveFunction;
+    if (this._saveFunction === null) {
+      console.warn("No save function provided for " + this);
+    }
 
     this._htmlElement = document.createElement("div");
     this._updateHTMLElement();
@@ -157,6 +162,9 @@ class ProjectHTMLWrapper {
       this.project.title = inputElements[0].value;
       this.project.description = inputElements[1].value;
       this._updateHTMLElement();
+      if (this._saveFunction !== null) {
+        this._saveFunction();
+      }
     });
 
     const cancelBtn = buttonContainer.appendChild(
@@ -205,6 +213,7 @@ class ProjectHTMLWrapper {
         () => {
           this._updateTodoContainer();
         },
+        this._saveFunction,
       );
       todoContainer.appendChild(todoElement.htmlElement);
     }
@@ -214,10 +223,16 @@ class ProjectHTMLWrapper {
     const todo = new Todo("New Todo", "A passable description", new Date());
     this.project.pushTodo(todo);
     this._updateTodoContainer();
+    if (this._saveFunction !== null) {
+      this._saveFunction();
+    }
   }
 
   _removeTodo(todo) {
     this.project.removeTodoAt(todo);
     this._updateTodoContainer();
+    if (this._saveFunction !== null) {
+      this._saveFunction();
+    }
   }
 }

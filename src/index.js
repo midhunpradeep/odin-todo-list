@@ -6,6 +6,7 @@ import style from "./style.css";
 
 import Project from "./lib/project/Project";
 import ProjectHTMLWrapper from "./lib/project/ProjectHTMLWrapper";
+import { retrieve, save } from "./lib/storage/storage";
 import Todo from "./lib/todo/Todo";
 
 class ToDoApp {
@@ -13,19 +14,23 @@ class ToDoApp {
     return this._projects;
   }
 
-  constructor(defaultProjects = []) {
-    this._projects = [...defaultProjects];
+  constructor() {
+    const savedProjects = this.retrieveProjects();
+
+    this._projects = savedProjects ? savedProjects : this._defaultProjects();
     this.updateProjectList();
 
-    if (defaultProjects.length > 0) {
-      this.setActiveProject(defaultProjects[0]);
-    }
+    this.setActiveProject(this.projects[0]);
 
     const newProjectBtn = document.getElementById("new-project-btn");
     newProjectBtn.addEventListener("click", () => {
       const newProject = this.createProject("Untitled Project", "");
       this.setActiveProject(newProject);
     });
+  }
+
+  _defaultProjects() {
+    return [new Project("Untitled project")];
   }
 
   updateProjectList() {
@@ -66,6 +71,9 @@ class ToDoApp {
         () => {
           this.updateProjectList();
         },
+        () => {
+          this.saveProjects();
+        },
       ).htmlElement,
     );
   }
@@ -74,13 +82,40 @@ class ToDoApp {
     const project = new Project(title, description);
     this.projects.push(project);
     this.updateProjectList();
+    this.saveProjects();
     return project;
   }
 
   removeProject(project) {
     this.projects.splice(this.projects.indexOf(project), 1);
     this.updateProjectList();
+    this.saveProjects();
+  }
+
+  saveProjects() {
+    save("projects", this.projects);
+  }
+
+  retrieveProjects() {
+    let projectData = retrieve("projects");
+    if (projectData === null) return null;
+
+    const projects = [];
+    for (const data of projectData) {
+      const project = new Project(data._title, data._description);
+      for (const todoData of data._todos) {
+        const todo = new Todo(
+          todoData._title,
+          todoData._description,
+          new Date(todoData._dueDate),
+          todoData._priority,
+        );
+        project.pushTodo(todo);
+      }
+      projects.push(project);
+    }
+    return projects;
   }
 }
 
-const app = new ToDoApp([new Project("Untitled Project")]);
+const app = new ToDoApp();
