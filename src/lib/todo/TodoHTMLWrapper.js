@@ -13,10 +13,11 @@ class TodoHTMLWrapper {
     return this._htmlElement;
   }
 
-  constructor(todo) {
+  constructor(todo, deleteFunction = null) {
     this._todo = todo;
 
     this._htmlElement = document.createElement("div");
+    this._deleteFunction = deleteFunction;
 
     this.htmlElement.classList.add("todo");
     this._updateHTMLElement();
@@ -48,6 +49,14 @@ class TodoHTMLWrapper {
     deleteBtn.type = "button";
     deleteBtn.innerHTML =
       "<span class='material-symbols-outlined'>delete</span>";
+
+    if (this._deleteFunction !== null) {
+      deleteBtn.addEventListener("click", () => {
+        this._deleteFunction();
+      });
+    } else {
+      console.warn("No delete function provided for " + this);
+    }
 
     const title = todoContent.appendChild(document.createElement("h4"));
     title.textContent = this.todo.title;

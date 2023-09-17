@@ -197,7 +197,9 @@ class ProjectHTMLWrapper {
 
     this.project.sort();
     for (const todo of this.project) {
-      const todoElement = new TodoHTMLWrapper(todo);
+      const todoElement = new TodoHTMLWrapper(todo, () => {
+        this._removeTodo();
+      });
       todoContainer.appendChild(todoElement.htmlElement);
     }
   }
@@ -205,6 +207,11 @@ class ProjectHTMLWrapper {
   _addTodo() {
     const todo = new Todo("New Todo", "A passable description", new Date());
     this.project.pushTodo(todo);
+    this._updateTodoContainer();
+  }
+
+  _removeTodo(todo) {
+    this.project.removeTodoAt(todo);
     this._updateTodoContainer();
   }
 }

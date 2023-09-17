@@ -32,8 +32,12 @@ class Project {
     return this._todos[index];
   }
 
-  removeToDoAt(index) {
+  removeTodoAt(index) {
     this._todos.splice(index, 1);
+  }
+
+  removeTodo(todo) {
+    this.removeTodoAt(this._todos.indexOf(todo));
   }
 
   sort() {
