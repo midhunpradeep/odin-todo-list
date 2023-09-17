@@ -83,9 +83,4 @@ class ToDoApp {
   }
 }
 
-const app = new ToDoApp([
-  new Project("New Project", "A cool description.", [
-    new Todo("New Todo", "A passable description", new Date(), 3),
-  ]),
-  new Project("Project B", "A cooler description."),
-]);
+const app = new ToDoApp([new Project("Untitled Project")]);
