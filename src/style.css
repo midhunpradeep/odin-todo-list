@@ -4,6 +4,11 @@
   --primary: hsl(221, 43%, 58%);
   --secondary: hsl(40, 43%, 89%);
   --accent: hsl(221, 43%, 49%);
+
+  --priority-high: red;
+  --priority-medium: yellow;
+  --priority-low: green;
+  --priority-none: transparent;
 }
 
 .material-symbols-outlined {
@@ -146,4 +151,34 @@ main > aside > ul > * {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.todo-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.todo {
+  background-color: var(--primary);
+  color: var(--background);
+  padding: 1rem;
+  border-left: 0.5rem solid var(--priority-none);
+}
+
+.todo[data-priority="1"] {
+  border-color: var(--priority-low);
+}
+
+.todo[data-priority="2"] {
+  border-color: var(--priority-medium);
+}
+
+.todo[data-priority="3"] {
+  border-color: var(--priority-high);
+}
+
+.todo .todo-due-date {
+  font-style: italic;
 }

@@ -6,6 +6,7 @@ import style from "./style.css";
 
 import Project from "./lib/project/Project";
 import ProjectHTMLWrapper from "./lib/project/ProjectHTMLWrapper";
+import Todo from "./lib/todo/Todo";
 
 class ToDoApp {
   get projects() {
@@ -83,6 +84,8 @@ class ToDoApp {
 }
 
 const app = new ToDoApp([
-  new Project("New Project", "A cool description."),
+  new Project("New Project", "A cool description.", [
+    new Todo("New Todo", "A passable description", new Date(), 3),
+  ]),
   new Project("Project B", "A cooler description."),
 ]);

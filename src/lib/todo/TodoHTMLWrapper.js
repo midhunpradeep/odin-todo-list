@@ -17,6 +17,8 @@ class TodoHTMLWrapper {
     this._todo = todo;
 
     this._htmlElement = document.createElement("div");
+
+    this.htmlElement.classList.add("todo");
     this._updateHTMLElement();
   }
 
@@ -25,7 +27,13 @@ class TodoHTMLWrapper {
     this.htmlElement.replaceChildren();
 
     // TODO: implement html
-    const title = this.htmlElement.appendChild(document.createElement("p"));
+    const title = this.htmlElement.appendChild(document.createElement("h4"));
     title.textContent = this.todo.title;
+
+    const dueDate = this.htmlElement.appendChild(document.createElement("p"));
+    dueDate.textContent = "Finish before: " + this.todo.dueDate.toDateString();
+    dueDate.classList.add("todo-due-date");
+
+    this.htmlElement.dataset.priority = this.todo.priority;
   }
 }

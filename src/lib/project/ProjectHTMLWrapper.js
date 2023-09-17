@@ -202,7 +202,7 @@ class ProjectHTMLWrapper {
   }
 
   _addTodo() {
-    const todo = new Todo("New Todo", "A passable description", new Date(), 0);
+    const todo = new Todo("New Todo", "A passable description", new Date());
     this.project.pushTodo(todo);
     this._updateTodoContainer();
   }
