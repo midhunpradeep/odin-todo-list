@@ -183,11 +183,13 @@ main > aside > ul > * {
 }
 
 .todo .only-in-expanded {
-  display: none;
+  position: absolute;
+  visibility: hidden;
 }
 
 .todo.expanded .only-in-expanded {
-  display: unset;
+  position: unset;
+  visibility: unset;
 }
 
 .todo.expanded .todo-controls {
@@ -201,7 +203,10 @@ main > aside > ul > * {
 .todo .todo-due-date {
   font-style: italic;
   font-size: 0.9rem;
-  margin-bottom: 1rem;
+}
+
+.todo .todo-due-date + * {
+  margin-top: 1rem;
 }
 
 .todo .todo-expand-btn {

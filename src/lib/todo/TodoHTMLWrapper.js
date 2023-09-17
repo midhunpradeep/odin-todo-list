@@ -60,6 +60,7 @@ class TodoHTMLWrapper {
 
     const description = todoContent.appendChild(document.createElement("p"));
     description.textContent = this.todo.description;
+    description.classList.add("todo-description");
     description.classList.add("only-in-expanded");
 
     const expandBtn = this.htmlElement.appendChild(
