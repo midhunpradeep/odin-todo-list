@@ -387,6 +387,11 @@ p, h1, h2, h3, h4, h5, h6 {
   --primary: hsl(221, 43%, 58%);
   --secondary: hsl(40, 43%, 89%);
   --accent: hsl(221, 43%, 49%);
+
+  --priority-high: red;
+  --priority-medium: yellow;
+  --priority-low: green;
+  --priority-none: transparent;
 }
 
 .material-symbols-outlined {
@@ -519,5 +524,122 @@ main > aside > ul > * {
   justify-content: end;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.project-container .project-content {
+  padding: 1rem;
+}
+
+.project-container .project-content > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.todo {
+  background-color: var(--primary);
+  color: var(--background);
+  padding: 1rem 1rem 0;
+  border-left: 0.5rem solid var(--priority-none);
+  display: grid;
+  gap: 0.5rem;
+  grid-template: 1fr max-content / 1fr max-content;
+  cursor: pointer;
+}
+
+.todo.editing .todo-content,
+.todo .todo-form {
+  position: absolute;
+  visibility: hidden;
+}
+
+.todo .todo-content,
+.todo.editing .todo-form {
+  position: unset;
+  visibility: unset;
+}
+
+.todo.editing .todo-form {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5em 1em;
+  align-items: center;
+}
+
+.todo.editing .todo-form label {
+  text-align: right;
+  font-style: italic;
+}
+
+.todo.editing .todo-form textarea {
+  resize: none;
+}
+
+.todo.editing .todo-form .todo-form-btns {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.todo.editing .todo-form .todo-form-btns > button {
+  background-color: var(--accent);
+  padding: 0.33rem 0.67rem;
+}
+
+.todo.expanded {
+  cursor: unset;
+}
+
+.todo[data-priority="1"] {
+  border-color: var(--priority-low);
+}
+
+.todo[data-priority="2"] {
+  border-color: var(--priority-medium);
+}
+
+.todo[data-priority="3"] {
+  border-color: var(--priority-high);
+}
+
+.todo .only-in-expanded {
+  position: absolute;
+  visibility: hidden;
+}
+
+.todo.expanded .only-in-expanded {
+  position: unset;
+  visibility: unset;
+}
+
+.todo.expanded .todo-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: start;
+  align-items: end;
+}
+
+.todo .todo-due-date {
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.todo .todo-due-date + * {
+  margin-top: 1rem;
+}
+
+.todo .todo-expand-btn {
+  width: 100%;
+  grid-column: 1 / -1;
 }
 
