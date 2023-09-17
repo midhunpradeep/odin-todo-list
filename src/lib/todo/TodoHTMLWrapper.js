@@ -26,15 +26,12 @@ class TodoHTMLWrapper {
     this.htmlElement.dataset.uuid = uuidv4();
     this.htmlElement.replaceChildren();
 
-    // TODO: implement html
     const title = this.htmlElement.appendChild(document.createElement("h4"));
     title.textContent = this.todo.title;
-    title.classList.add("always-visible");
 
     const dueDate = this.htmlElement.appendChild(document.createElement("p"));
     dueDate.textContent = "Finish before: " + this.todo.dueDate.toDateString();
     dueDate.classList.add("todo-due-date");
-    dueDate.classList.add("always-visible");
 
     this.htmlElement.dataset.priority = this.todo.priority;
 
@@ -42,12 +39,12 @@ class TodoHTMLWrapper {
       document.createElement("p"),
     );
     description.textContent = this.todo.description;
+    description.classList.add("only-in-expanded");
 
     const expandBtn = this.htmlElement.appendChild(
       document.createElement("button"),
     );
     expandBtn.type = "button";
-    expandBtn.classList.add("always-visible");
     expandBtn.classList.add("todo-expand-btn");
 
     expandBtn.updateText = () => {

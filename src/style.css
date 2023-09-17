@@ -179,11 +179,11 @@ main > aside > ul > * {
   border-color: var(--priority-high);
 }
 
-.todo > :not(.always-visible) {
+.todo .only-in-expanded {
   display: none;
 }
 
-.todo.expanded > :not(.always-visible) {
+.todo.expanded .only-in-expanded {
   display: unset;
 }
 
