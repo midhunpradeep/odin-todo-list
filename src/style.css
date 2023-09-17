@@ -171,6 +171,47 @@ main > aside > ul > * {
   cursor: pointer;
 }
 
+.todo.editing .todo-content,
+.todo .todo-form {
+  position: absolute;
+  visibility: hidden;
+}
+
+.todo .todo-content,
+.todo.editing .todo-form {
+  position: unset;
+  visibility: unset;
+}
+
+.todo.editing .todo-form {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5em 1em;
+  align-items: center;
+}
+
+.todo.editing .todo-form label {
+  text-align: right;
+  font-style: italic;
+}
+
+.todo.editing .todo-form textarea {
+  resize: none;
+}
+
+.todo.editing .todo-form .todo-form-btns {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.todo.editing .todo-form .todo-form-btns > button {
+  background-color: var(--accent);
+  padding: 0.33rem 0.67rem;
+}
+
 .todo.expanded {
   cursor: unset;
 }

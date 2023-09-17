@@ -197,9 +197,15 @@ class ProjectHTMLWrapper {
 
     this.project.sort();
     for (const todo of this.project) {
-      const todoElement = new TodoHTMLWrapper(todo, () => {
-        this._removeTodo();
-      });
+      const todoElement = new TodoHTMLWrapper(
+        todo,
+        () => {
+          this._removeTodo();
+        },
+        () => {
+          this._updateTodoContainer();
+        },
+      );
       todoContainer.appendChild(todoElement.htmlElement);
     }
   }
