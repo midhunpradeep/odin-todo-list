@@ -26,18 +26,39 @@ class TodoHTMLWrapper {
     this.htmlElement.dataset.uuid = uuidv4();
     this.htmlElement.replaceChildren();
 
-    const title = this.htmlElement.appendChild(document.createElement("h4"));
+    const todoContent = this.htmlElement.appendChild(
+      document.createElement("div"),
+    );
+    todoContent.classList.add("todo-content");
+
+    const todoControls = this.htmlElement.appendChild(
+      document.createElement("div"),
+    );
+    todoControls.classList.add("todo-controls");
+    todoControls.classList.add("only-in-expanded");
+
+    const editBtn = todoControls.appendChild(document.createElement("button"));
+    editBtn.type = "button";
+    editBtn.innerHTML =
+      "<span class='material-symbols-outlined'>edit_square</span>";
+
+    const deleteBtn = todoControls.appendChild(
+      document.createElement("button"),
+    );
+    deleteBtn.type = "button";
+    deleteBtn.innerHTML =
+      "<span class='material-symbols-outlined'>delete</span>";
+
+    const title = todoContent.appendChild(document.createElement("h4"));
     title.textContent = this.todo.title;
 
-    const dueDate = this.htmlElement.appendChild(document.createElement("p"));
+    const dueDate = todoContent.appendChild(document.createElement("p"));
     dueDate.textContent = "Finish before: " + this.todo.dueDate.toDateString();
     dueDate.classList.add("todo-due-date");
 
     this.htmlElement.dataset.priority = this.todo.priority;
 
-    const description = this.htmlElement.appendChild(
-      document.createElement("p"),
-    );
+    const description = todoContent.appendChild(document.createElement("p"));
     description.textContent = this.todo.description;
     description.classList.add("only-in-expanded");
 

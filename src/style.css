@@ -165,6 +165,9 @@ main > aside > ul > * {
   color: var(--background);
   padding: 1rem 1rem 0;
   border-left: 0.5rem solid var(--priority-none);
+  display: grid;
+  gap: 0.5rem;
+  grid-template: 1fr max-content / 1fr max-content;
 }
 
 .todo[data-priority="1"] {
@@ -187,6 +190,14 @@ main > aside > ul > * {
   display: unset;
 }
 
+.todo.expanded .todo-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: start;
+  align-items: end;
+}
+
 .todo .todo-due-date {
   font-style: italic;
   font-size: 0.9rem;
@@ -195,4 +206,5 @@ main > aside > ul > * {
 
 .todo .todo-expand-btn {
   width: 100%;
+  grid-column: 1 / -1;
 }
