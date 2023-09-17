@@ -163,7 +163,7 @@ main > aside > ul > * {
 .todo {
   background-color: var(--primary);
   color: var(--background);
-  padding: 1rem;
+  padding: 1rem 1rem 0;
   border-left: 0.5rem solid var(--priority-none);
 }
 
@@ -179,6 +179,20 @@ main > aside > ul > * {
   border-color: var(--priority-high);
 }
 
+.todo > :not(.always-visible) {
+  display: none;
+}
+
+.todo.expanded > :not(.always-visible) {
+  display: unset;
+}
+
 .todo .todo-due-date {
   font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.todo .todo-expand-btn {
+  width: 100%;
 }
