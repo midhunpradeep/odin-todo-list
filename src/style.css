@@ -39,6 +39,7 @@ textarea {
   border-radius: 0.67rem;
   padding: 0.1rem 0.67rem;
   border: unset;
+  min-width: 200px;
 }
 
 input:focus,
@@ -65,6 +66,12 @@ body > header {
 body > main {
   display: grid;
   grid-template: 1fr / max-content 1fr;
+}
+
+@media (max-width: 1000px) {
+  body > main {
+    grid-template: max-content 1fr / 1fr;
+  }
 }
 
 main > aside {
@@ -117,7 +124,6 @@ main > aside .project-list button.active-btn {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  align-items: start;
 }
 
 .project-container header.editing .header-text-container {
@@ -134,10 +140,10 @@ main > aside .project-list button.active-btn {
 
 .project-container header .header-text-form {
   display: none;
-  flex: 1;
 }
 
 .project-container header.editing .header-text-form {
+  flex: 1;
   display: grid;
   grid-template-columns: max-content 1fr;
   column-gap: 0.5rem;
@@ -147,6 +153,20 @@ main > aside .project-list button.active-btn {
 
 .project-container header.editing .header-text-form > label {
   text-align: right;
+}
+
+@media (max-width: 600px) {
+  .project-container header.editing {
+    flex-direction: column;
+  }
+
+  .project-container header.editing .header-text-form {
+    grid-template-columns: 1fr;
+  }
+
+  .project-container header.editing .header-text-form > label {
+    text-align: left;
+  }
 }
 
 .project-container header.editing .form-btn-container {
@@ -221,6 +241,20 @@ main > aside .project-list button.active-btn {
   text-align: right;
 }
 
+@media (max-width: 600px) {
+  .todo {
+    grid-template: 1fr max-content max-content / 1fr;
+  }
+
+  .todo.editing .todo-form {
+    grid-template: max-content 1fr / 1fr;
+  }
+
+  .todo.editing .todo-form label {
+    text-align: left;
+  }
+}
+
 .todo.editing .todo-form textarea {
   resize: none;
 }
@@ -266,10 +300,9 @@ main > aside .project-list button.active-btn {
 
 .todo.expanded .todo-controls {
   display: flex;
-  flex-direction: column;
   gap: 0.5rem;
-  justify-content: start;
-  align-items: end;
+  justify-content: end;
+  align-items: start;
 }
 
 .todo .todo-due-date + * {
