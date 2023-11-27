@@ -382,11 +382,11 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 :root {
-  --text: hsl(42, 43%, 9%);
-  --background: hsl(43, 47%, 97%);
-  --primary: hsl(221, 43%, 58%);
-  --secondary: hsl(40, 43%, 89%);
-  --accent: hsl(221, 43%, 49%);
+  --text: hsl(0, 0%, 95%);
+  --background: hsl(0, 0%, 10%);
+  --primary: hsl(272, 76%, 53%);
+  --secondary: hsl(0, 0%, 15%);
+  --accent: hsl(260, 100%, 44%);
 
   --priority-high: red;
   --priority-medium: yellow;
@@ -415,19 +415,35 @@ button {
   justify-content: center;
 }
 
+input,
+textarea {
+  background-image: linear-gradient(90deg, var(--secondary), var(--background));
+  color: var(--text);
+  border-radius: 0.67rem;
+  padding: 0.1rem 0.67rem;
+  border: unset;
+  min-width: 200px;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--text);
+}
+
 body {
   min-height: 100dvh;
   background-color: var(--background);
   color: var(--text);
+  font-family: "Poppins", sans-serif;
   display: grid;
   grid-template: max-content 1fr / 1fr;
 }
 
 body > header {
-  background-color: var(--primary);
-  color: var(--background);
-  padding: 0.5em;
-  font-size: 3rem;
+  padding: 1rem;
+  background-image: linear-gradient(90deg, var(--secondary), transparent 20%);
+  margin: 1rem;
+  border-radius: 1rem;
 }
 
 body > main {
@@ -435,10 +451,17 @@ body > main {
   grid-template: 1fr / max-content 1fr;
 }
 
+@media (max-width: 1000px) {
+  body > main {
+    grid-template: max-content 1fr / 1fr;
+  }
+}
+
 main > aside {
-  background-color: var(--accent);
-  color: var(--background);
-  padding: 1em;
+  padding: 1rem;
+  margin: 1rem;
+  background-image: linear-gradient(90deg, var(--secondary), transparent);
+  border-radius: 1rem;
 }
 
 main > aside > div:first-child {
@@ -446,7 +469,6 @@ main > aside > div:first-child {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  font-size: 1.5rem;
 }
 
 main > aside > ul {
@@ -459,14 +481,32 @@ main > aside > ul > * {
   margin-top: 0.25rem;
 }
 
+main > aside .project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+main > aside .project-list button {
+  width: 100%;
+  padding: 0.1rem 1rem;
+  border-radius: 0.5rem;
+  text-align: start;
+}
+
+main > aside .project-list button.active-btn {
+  background-image: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
 .project-container header {
-  background-color: var(--secondary);
   line-height: 1.2;
   padding: 1rem;
+  margin: 1rem;
+  background-image: linear-gradient(45deg, var(--primary), var(--accent));
+  border-radius: 1rem;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  align-items: start;
 }
 
 .project-container header.editing .header-text-container {
@@ -481,27 +521,35 @@ main > aside > ul > * {
   margin: 0;
 }
 
-.project-container header h2 {
-  font-size: 1.2rem;
-  font-weight: normal;
-  font-style: italic;
-}
-
 .project-container header .header-text-form {
   display: none;
-  flex: 1;
 }
 
 .project-container header.editing .header-text-form {
+  flex: 1;
   display: grid;
   grid-template-columns: max-content 1fr;
-  gap: 0.33em;
+  column-gap: 0.5rem;
+  row-gap: 0.33rem;
   align-items: center;
 }
 
 .project-container header.editing .header-text-form > label {
-  font-style: italic;
   text-align: right;
+}
+
+@media (max-width: 600px) {
+  .project-container header.editing {
+    flex-direction: column;
+  }
+
+  .project-container header.editing .header-text-form {
+    grid-template-columns: 1fr;
+  }
+
+  .project-container header.editing .header-text-form > label {
+    text-align: left;
+  }
 }
 
 .project-container header.editing .form-btn-container {
@@ -513,8 +561,6 @@ main > aside > ul > * {
 }
 
 .project-container header.editing .form-btn-container > button {
-  background-color: var(--primary);
-  color: var(--background);
   padding: 0.33rem 0.67rem;
 }
 
@@ -527,7 +573,10 @@ main > aside > ul > * {
 }
 
 .project-container .project-content {
+  margin: 1rem;
   padding: 1rem;
+  background-image: linear-gradient(90deg, var(--secondary), transparent 10%);
+  border-radius: 1rem;
 }
 
 .project-container .project-content > div:first-child {
@@ -544,8 +593,6 @@ main > aside > ul > * {
 }
 
 .todo {
-  background-color: var(--primary);
-  color: var(--background);
   padding: 1rem 1rem 0;
   border-left: 0.5rem solid var(--priority-none);
   display: grid;
@@ -575,7 +622,20 @@ main > aside > ul > * {
 
 .todo.editing .todo-form label {
   text-align: right;
-  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .todo {
+    grid-template: 1fr max-content max-content / 1fr;
+  }
+
+  .todo.editing .todo-form {
+    grid-template: max-content 1fr / 1fr;
+  }
+
+  .todo.editing .todo-form label {
+    text-align: left;
+  }
 }
 
 .todo.editing .todo-form textarea {
@@ -591,12 +651,12 @@ main > aside > ul > * {
 }
 
 .todo.editing .todo-form .todo-form-btns > button {
-  background-color: var(--accent);
   padding: 0.33rem 0.67rem;
 }
 
 .todo.expanded {
   cursor: unset;
+  background-image: linear-gradient(90deg, var(--secondary), transparent 20%);
 }
 
 .todo[data-priority="1"] {
@@ -623,15 +683,9 @@ main > aside > ul > * {
 
 .todo.expanded .todo-controls {
   display: flex;
-  flex-direction: column;
   gap: 0.5rem;
-  justify-content: start;
-  align-items: end;
-}
-
-.todo .todo-due-date {
-  font-style: italic;
-  font-size: 0.9rem;
+  justify-content: end;
+  align-items: start;
 }
 
 .todo .todo-due-date + * {
