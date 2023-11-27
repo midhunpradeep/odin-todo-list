@@ -143,7 +143,6 @@ main > aside .project-list button.active-btn {
 }
 
 .project-container header.editing .form-btn-container > button {
-  color: var(--background);
   padding: 0.33rem 0.67rem;
 }
 
