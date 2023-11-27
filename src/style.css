@@ -42,10 +42,7 @@ body {
 }
 
 body > header {
-  background-color: var(--primary);
-  color: var(--background);
   padding: 0.5em;
-  font-size: 3rem;
 }
 
 body > main {
@@ -54,8 +51,6 @@ body > main {
 }
 
 main > aside {
-  background-color: var(--accent);
-  color: var(--background);
   padding: 1em;
 }
 
@@ -64,7 +59,6 @@ main > aside > div:first-child {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  font-size: 1.5rem;
 }
 
 main > aside > ul {
@@ -78,7 +72,6 @@ main > aside > ul > * {
 }
 
 .project-container header {
-  background-color: var(--secondary);
   line-height: 1.2;
   padding: 1rem;
   display: flex;
@@ -99,12 +92,6 @@ main > aside > ul > * {
   margin: 0;
 }
 
-.project-container header h2 {
-  font-size: 1.2rem;
-  font-weight: normal;
-  font-style: italic;
-}
-
 .project-container header .header-text-form {
   display: none;
   flex: 1;
@@ -118,7 +105,6 @@ main > aside > ul > * {
 }
 
 .project-container header.editing .header-text-form > label {
-  font-style: italic;
   text-align: right;
 }
 
@@ -131,7 +117,6 @@ main > aside > ul > * {
 }
 
 .project-container header.editing .form-btn-container > button {
-  background-color: var(--primary);
   color: var(--background);
   padding: 0.33rem 0.67rem;
 }
@@ -162,8 +147,6 @@ main > aside > ul > * {
 }
 
 .todo {
-  background-color: var(--primary);
-  color: var(--background);
   padding: 1rem 1rem 0;
   border-left: 0.5rem solid var(--priority-none);
   display: grid;
@@ -193,7 +176,6 @@ main > aside > ul > * {
 
 .todo.editing .todo-form label {
   text-align: right;
-  font-style: italic;
 }
 
 .todo.editing .todo-form textarea {
@@ -209,7 +191,6 @@ main > aside > ul > * {
 }
 
 .todo.editing .todo-form .todo-form-btns > button {
-  background-color: var(--accent);
   padding: 0.33rem 0.67rem;
 }
 
@@ -245,11 +226,6 @@ main > aside > ul > * {
   gap: 0.5rem;
   justify-content: start;
   align-items: end;
-}
-
-.todo .todo-due-date {
-  font-style: italic;
-  font-size: 0.9rem;
 }
 
 .todo .todo-due-date + * {
