@@ -1,9 +1,9 @@
 :root {
-  --text: hsl(42, 43%, 9%);
-  --background: hsl(43, 47%, 97%);
-  --primary: hsl(221, 43%, 58%);
-  --secondary: hsl(40, 43%, 89%);
-  --accent: hsl(221, 43%, 49%);
+  --text: hsl(0, 0%, 95%);
+  --background: hsl(0, 0%, 10%);
+  --primary: hsl(272, 76%, 53%);
+  --secondary: hsl(0, 0%, 15%);
+  --accent: hsl(260, 100%, 44%);
 
   --priority-high: red;
   --priority-medium: yellow;
