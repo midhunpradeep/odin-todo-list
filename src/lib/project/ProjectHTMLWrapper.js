@@ -47,12 +47,12 @@ class ProjectHTMLWrapper {
     );
     headerTextContainer.classList.add("header-text-container");
 
-    const title = headerTextContainer.appendChild(document.createElement("h1"));
+    const title = headerTextContainer.appendChild(document.createElement("h2"));
     title.textContent = this.project.title;
     title.dataset.formLabel = "Title";
 
     const description = headerTextContainer.appendChild(
-      document.createElement("h2"),
+      document.createElement("p"),
     );
     description.textContent = this.project.description;
     description.dataset.formLabel = "Description";
