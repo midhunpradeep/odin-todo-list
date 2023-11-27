@@ -77,6 +77,23 @@ main > aside > ul > * {
   margin-top: 0.25rem;
 }
 
+main > aside .project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+main > aside .project-list button {
+  width: 100%;
+  padding: 0.1rem 1rem;
+  border-radius: 0.5rem;
+  text-align: start;
+}
+
+main > aside .project-list button.active-btn {
+  background-image: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
 .project-container header {
   line-height: 1.2;
   padding: 1rem;

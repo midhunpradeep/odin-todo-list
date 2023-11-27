@@ -18,6 +18,7 @@ class ToDoApp {
     const savedProjects = this.retrieveProjects();
 
     this._projects = savedProjects ? savedProjects : this._defaultProjects();
+    this._projectBtns = new Map();
     this.updateProjectList();
 
     this.setActiveProject(this.projects[0]);
@@ -36,6 +37,7 @@ class ToDoApp {
   updateProjectList() {
     const listElement = document.querySelector(".project-list");
     listElement.replaceChildren();
+    this._projectBtns = new Map();
 
     for (const project of this.projects) {
       const listItemElement = listElement.appendChild(
@@ -47,6 +49,8 @@ class ToDoApp {
       );
       projectBtn.type = "button";
       projectBtn.textContent = project.title;
+
+      this._projectBtns.set(project, projectBtn);
       projectBtn.addEventListener("click", () => {
         this.setActiveProject(project);
       });
@@ -59,6 +63,11 @@ class ToDoApp {
 
     if (activeProject === null) {
       return;
+    }
+
+    const prevProjectBtn = document.querySelector(".active-btn");
+    if (prevProjectBtn) {
+      prevProjectBtn.classList.remove("active-btn");
     }
 
     const projectElement = containerElement.appendChild(
@@ -76,6 +85,8 @@ class ToDoApp {
         },
       ).htmlElement,
     );
+
+    this._projectBtns.get(activeProject).classList.add("active-btn");
   }
 
   createProject(title, description) {
